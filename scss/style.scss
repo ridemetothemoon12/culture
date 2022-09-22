@@ -1,0 +1,305 @@
+@charset "utf-8";
+
+// 믹스인 세팅
+@mixin flex($space) {
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: $space;
+}
+@mixin size($w, $h) {
+    width: $w;
+    height: $h;
+}
+@mixin absolute($t, $l) {
+    top: $t;
+    left: $l;
+}
+
+// 전체 세팅
+* {
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+// 헤더
+.header {
+    position: relative;
+}
+.header_wrap {
+    position: fixed;
+    @include size(100%, 70px);
+    @include flex(space-between);
+    align-items: center;
+    z-index: 99;
+    .logo {
+        @include flex(space-between);
+        align-items: center;
+        flex-basis: 15%;
+        height: 100%;
+        background-color: #999;
+        img {
+            margin-left: 30px;
+        }
+    }
+    .menu {
+        flex-basis: 65%;
+        background-color: #333;
+        height: 100%;
+        ul {
+            @include flex(flex-start);
+            line-height: 70px;
+            li {
+                margin: 0 3%;
+            }
+            a {
+                color: white;
+            }
+        }
+    }
+    .icon {
+        flex-basis: 20%;
+        background-color: coral;
+        height: 100%;
+        ul {
+            height: 100%;
+            @include flex(flex-end);
+            align-items: center;
+            li {
+                margin-right:30px;
+            }
+        }
+    }
+}
+
+// 배너 세팅
+.swiper-slide {
+    @include size(100%, 700px);
+}
+.banner1 {
+    background-color: skyblue;
+    position: relative;
+    p {
+        position: absolute;
+        bottom: 0;
+        font-size: 100px;
+    }
+}
+.banner2 {
+    background-color: skyblue;
+}
+.banner3 {
+    background-color: skyblue;
+}
+.banner4 {
+    background-color: skyblue;
+}
+// 배너 불릿
+.swiper-pagination-bullet {
+    transition: .3s;
+    background-color: white;
+    @include size(20px, 20px);
+    border-radius: 0;
+    transform: rotate(45deg);
+    margin: 100px 100px !important;
+}
+.swiper-pagination-bullet-active {
+    position: relative;
+    &::after {
+            position: absolute;
+            content: "";
+            @include size(40px, 40px);
+            @include absolute(50%, -60%);
+            transform: translateY(-50%);
+            border: 16px solid transparent;
+            
+    }
+}
+
+// 컨텐츠 1번
+.content_1 {
+    @include size(100%, 400px);
+    background-color: #333;
+    .content_wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        @include flex(space-between);
+        flex-direction: column;
+    }
+    .title {
+        font-size: 48px;
+        margin: 60px 0;
+    }
+    .menu {
+        ul {
+            @include flex(space-around);
+        }
+    }
+}
+
+// 컨탠츠 2번 
+.content_2 {
+    @extend .content_1;
+    @include size(100%, 700px);
+    background-color: #999;
+    .content {
+        @include size(80%, 500px);
+        margin: 0 auto;
+        background-color: #888;
+        @include flex(space-between);
+        align-items: center;
+    }
+    .right {
+        margin: 0 auto;
+        ul {
+            width: 300px;
+            @include flex(space-between);
+            flex-wrap: wrap;
+            font-size: 22px;
+            li {
+                width: 60px;
+                margin: 20px;
+                background-color: #444;
+            }
+        }
+    }
+}
+// 컨텐츠 3
+.content_3 {
+    .content_wrap {
+        @include flex(space-between);
+        @include size(100%, 600px);
+    }
+    .left {
+        position: relative;
+        @include size(40%, 100%);
+        background-color: #dae;
+        &::before {
+            position: absolute;
+            @include size(90px, 90px);
+            content: "";
+            border: 1px solid white;
+        }
+        &::after {
+            position: absolute;
+            @include size(150px, 50px);
+            @include absolute(91px, 90px);
+            background-color: white;
+            content: "NEWS";
+            text-align: center;
+            line-height: 50px;
+            filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.3));
+        }
+    }
+    .right {
+        @include size(60%, 100%);
+        background-color: skyblue;
+        .title {
+            @include size(100%, 150px);
+            background-color: #333;
+        }
+        .nav {
+            @extend .title;
+            height: 70px;
+            background-color: #dae;
+            ul {
+                height: 100%;
+                @include flex(flex-end);
+                align-items: center;
+            }
+            li {
+                margin: 30px;
+            }
+        }
+    }
+}
+// 컨텐츠 4
+.content_4 {
+    width: 100%;
+    .content_wrap {
+        @include flex(space-between);
+        @include size(100%, 600px);
+    }
+    .content {
+        @include flex(center);
+        @include size(33.5%, 100%);
+        background-color: #333;        
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+        &:nth-child(2) {
+            width: 33%;
+            background-color: #999;
+        }
+        .btn {
+            @include size(150px,50px);
+            background-color: black;
+            color: white;
+            line-height: 50px;
+        }
+        p {
+            margin: 30px 0;
+        }
+    }
+}
+// 컨탠츠 5
+.content_5 {
+    width: 100%;
+    .content_wrap {
+        @include flex(center);
+        align-items: center;
+        @include size(100%, 200px);
+        background-color: #ddd;
+        ul {
+            width: 1500px;
+            @include flex(space-evenly);
+            flex-wrap: wrap;
+        }
+    }
+}
+// 푸터
+.footer {
+    position: relative;
+    @include size(100%, 322px);
+    background-color: black;
+    color: white;
+    &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        @include size(100%, 2px);
+        bottom: 45px;
+        background-color: white;
+    }
+    a {
+        color: white;
+    }
+    .content_wrap {
+        max-width: 1200px;
+        @include flex(space-between);
+        align-items: center;
+        flex-direction: column;
+        margin: 0 auto;
+    }
+    .top {
+        @include size(100%, 100px);
+        border-bottom: 2px solid white;
+        line-height: 100px;
+        ul {
+            @include flex(space-between);
+        }
+    }
+    .bottom {
+        @include size(100%, 210px);
+        @include flex(space-between);
+        margin-top: 30px;
+        li {
+            margin: 10px 0;
+        }
+    }
+}
