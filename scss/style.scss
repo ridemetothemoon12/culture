@@ -14,6 +14,15 @@
     top: $t;
     left: $l;
 }
+@mixin content_4_ba {
+    content: "";
+    @include size(90px, 4px);
+    background-color: #143b63;
+}
+@mixin btn_border {
+    border: 1px solid;
+    border-color: white;  
+}
 
 // 전체 세팅
 * {
@@ -33,7 +42,7 @@ a {
 }
 .header_wrap {
     position: fixed;
-    @include size(100%, 70px);
+    @include size(100%, 150px);
     @include flex(space-between);
     align-items: center;
     z-index: 99;
@@ -42,20 +51,30 @@ a {
         align-items: center;
         flex-basis: 15%;
         height: 100%;
-        background-color: #999;
+        background-color: transparent;
         img {
             margin-left: 30px;
         }
     }
+    &.on {
+        height: 100px;
+        background-color: rgb(48, 48, 48);
+    }
     .menu {
+        font-size: 18px;
         flex-basis: 65%;
-        background-color: #333;
         height: 100%;
         ul {
             @include flex(flex-start);
-            line-height: 70px;
+            line-height: 150px;
             li {
                 margin: 0 3%;
+                &:hover {
+                    a {
+                        font-weight: bold;
+                        color: #143b63;
+                    }
+                }
             }
             a {
                 color: white;
@@ -64,7 +83,6 @@ a {
     }
     .icon {
         flex-basis: 20%;
-        background-color: coral;
         height: 100%;
         ul {
             height: 100%;
@@ -76,177 +94,376 @@ a {
         }
     }
 }
-
 // 배너 세팅
 .swiper-slide {
-    @include size(100%, 700px);
+    @include size(100%, 960px);
+    background-size: cover;
+    background-size: 100% 100%;
+    background: no-repeat;
 }
 .banner1 {
-    background-color: skyblue;
-    position: relative;
-    p {
-        position: absolute;
-        bottom: 0;
-        font-size: 100px;
-    }
+    background-image: url("../images/banner1.png");
 }
 .banner2 {
-    background-color: skyblue;
+    background-image: url("../images/banner2.png");
 }
 .banner3 {
-    background-color: skyblue;
+    background-image: url("../images/banner3.png");
 }
 .banner4 {
-    background-color: skyblue;
+    background-image: url("../images/banner4.png");
 }
 // 배너 불릿
-.swiper-pagination-bullet {
-    transition: .3s;
-    background-color: white;
-    @include size(20px, 20px);
-    border-radius: 0;
-    transform: rotate(45deg);
-    margin: 100px 100px !important;
-}
-.swiper-pagination-bullet-active {
-    position: relative;
-    &::after {
+    .bullet {
+        position: absolute;
+        @include absolute(80%, 100px);
+        @include size(400px, 80px);
+        z-index: 3;
+        .bullet_wrap {
+            width: 100%;
+            @include flex(space-between);
+        }
+        .item {
+            position: relative;
+            @include size(80px, 80px);
+            @include flex(center);
+            align-items: center;
+            &.active {
+                .left {
+                    opacity: 1;
+                    transform-origin: center left;
+                    animation: loading-1 3s linear forwards;
+                    animation-delay: 3s;
+                }
+                .right {
+                    opacity: 1;
+                    transform-origin: center right;
+                    animation: loading-2 3s linear forwards;
+                }   
+                .bullet_btn {
+                    background-color: white;
+                }
+            }
+        }
+        .bullet_btn {
+            @include size(10px, 10px);
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: rotate(45deg);
+            z-index: 99;
+        }
+        .loading {
             position: absolute;
-            content: "";
-            @include size(40px, 40px);
-            @include absolute(50%, -60%);
-            transform: translateY(-50%);
-            border: 16px solid transparent;
-            
+            @include size(50px, 50px);
+            .loading_wrap {
+                margin-top: 4px;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .left_wrap {
+                position: relative;
+                @include size(22px, 42px);
+                overflow: hidden;
+            }
+            .left {
+                opacity: 0;
+                position: absolute;
+                left: 22px;
+                @include size(20px, 40px);
+                border-top-right-radius: 40px;
+                border-bottom-right-radius: 40px;
+                @include btn_border;
+                border-left: 0; 
+                z-index: 9;
+                transition: transform 3s, opacity 1s;
+            }
+            .right_wrap {
+                position: relative;
+                @include size(22px, 42px);
+                overflow: hidden;
+            }
+            .right {
+                opacity: 0;
+                position: absolute;
+                left: -21px;
+                @include size(20px, 40px);
+                border-top-left-radius: 40px;
+                border-bottom-left-radius: 40px;
+                @include btn_border;
+                border-right: 0; 
+                z-index: 9;
+                transition: transform 3s, opacity 1s;
+            }
+        }
     }
-}
+
+    @keyframes loading-1 {
+        0% {transform: rotate(0deg);}
+        100% {transform: rotate(180deg);}
+    }
+    @keyframes loading-2 {
+        0% {transform: rotate(0deg);}
+        100% {transform: rotate(180deg);}
+    }
 
 // 컨텐츠 1번
 .content_1 {
-    @include size(100%, 400px);
-    background-color: #333;
-    .content_wrap {
-        max-width: 1200px;
-        margin: 0 auto;
+    @include size(100%, 375px);
+    display: flex;
+    align-items: center;
+        .content_wrap {
         @include flex(space-between);
+        width: 1300px;
+        flex-wrap: wrap;
+        margin: 0 auto;
         flex-direction: column;
     }
     .title {
-        font-size: 48px;
-        margin: 60px 0;
+        font-size: 37px;
+        margin-bottom: 50px;
+        padding-right: 20px;
     }
     .menu {
         ul {
             @include flex(space-around);
+            flex-wrap: wrap;
+            margin: 0 30px;
+            li {
+                @include flex(center);
+                flex-direction: column;
+                text-align: center;
+                font-size: 22px;
+            }
+            img {
+                @include size(80px, 80px)
+            }
         }
     }
 }
 
 // 컨탠츠 2번 
 .content_2 {
-    @extend .content_1;
-    @include size(100%, 700px);
-    background-color: #999;
-    .content {
-        @include size(80%, 500px);
-        margin: 0 auto;
-        background-color: #888;
-        @include flex(space-between);
-        align-items: center;
+    @include size(100%, 820px);
+    background-image: url("../images/backimage1.png"); 
+    display: flex;
+    align-items: center;
+    .content_wrap {
+        width: 1300px;
+        flex-direction: column;
+        margin: auto;
+        margin-bottom: 120px;
     }
-    .right {
+    .title {
+        font-size: 37px;
+        margin-bottom: 60px;
+    }
+    .content {
+        max-width: 1200px;
+        height: 518px;
         margin: 0 auto;
+        background-color: rgba(255, 255, 255, 0.85);
+        @include flex(space-around);
+        .left {
+            @include flex(center);
+            align-items: center;
+        }
+        .right {
+            @extend .left;
+            flex-direction: column;
+        }
         ul {
-            width: 300px;
             @include flex(space-between);
+            @include size(500px, 300px);
             flex-wrap: wrap;
-            font-size: 22px;
-            li {
-                width: 60px;
-                margin: 20px;
-                background-color: #444;
+            font-size: 28px;
+            text-align: center;
+        }
+        li {
+            width: 33%;
+            line-height: 100px;
+            &:nth-child(4) {
+                margin-left: 12px;
+            }
+            &:nth-child(5) {
+                margin-right: 12px;
             }
         }
     }
 }
 // 컨텐츠 3
 .content_3 {
+    @include size(100%, 710px);
+    background: url("../images/backimage3.png");
     .content_wrap {
         @include flex(space-between);
-        @include size(100%, 600px);
     }
     .left {
-        position: relative;
-        @include size(40%, 100%);
-        background-color: #dae;
-        &::before {
-            position: absolute;
-            @include size(90px, 90px);
-            content: "";
-            border: 1px solid white;
+        @include size(770px, 710px);
+        background-color: #143b63;
+        @include flex(center);
+        align-items: center;
+        flex-direction: column;
+        .progress {
+            width: 510px;
+            display: flex;
+            justify-content: flex-end;
+            .progress_wrap {
+                width: 150px;
+                height: 30px;
+                background-color: white;
+                #file {
+                    width: 150px;
+                }
+            }
         }
-        &::after {
-            position: absolute;
-            @include size(150px, 50px);
-            @include absolute(91px, 90px);
-            background-color: white;
-            content: "NEWS";
-            text-align: center;
-            line-height: 50px;
-            filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.3));
+        .swiper-container {
+            @include size(510px, 470px);
+            background-size: cover;
+            background-size: 100% 100%;
+            background: no-repeat;
+        }
+        .swiper-slide {
+            @include size(510px, 470px);
+            background-size: contain;
+        }
+        .news1 {
+            background: url("../images/news1.png");
+            background-size: contain;
+        }
+        .news2 {
+            background: url("../images/news2.png");
+        }
+        .news3 {
+            background: url("../images/news3.png");
         }
     }
     .right {
-        @include size(60%, 100%);
-        background-color: skyblue;
+        @include size(1150px,100%);
         .title {
-            @include size(100%, 150px);
-            background-color: #333;
+            @include flex(flex-start);
+            align-items: center;
+            @include size(100%, 200px);
+            .text {
+                margin-left: 100px;
+            }
+            h3 {
+                font-size: 42px;
+            }
+            p {
+                margin-top: 15px;
+                font-size: 20px;
+            }
         }
         .nav {
-            @extend .title;
-            height: 70px;
-            background-color: #dae;
+            @include flex(flex-end);
+            @include size(100%, 70px);
+            background-color: #143b63;
             ul {
-                height: 100%;
-                @include flex(flex-end);
+                @include flex(space-between);
                 align-items: center;
             }
             li {
-                margin: 30px;
+                margin: 0 30px;
+            }
+            a {
+                color: white;
+            }
+        }
+        .content {
+            @include size(100%, 440px);
+            @include flex(flex-start);
+            align-items: center;
+            font-size: 1.5em;
+            ul {
+                max-width: 870px;
+                margin-left: 150px;
+                @include flex(space-between);
+                flex-direction: column;
+            }
+            li {
+                position: relative;
+                @include flex(flex-start);
+                align-items: center;
+                padding: 20px 0;
+                &::after {
+                    bottom: 0;
+                    position: absolute;
+                    content: "";
+                    @include size(870px, 2.5px);
+                    background-color: #143b63;
+                }
+            }
+            a {
+                margin-left: 30px;
+            }
+            .date {
+                text-align: center;
+                h3 {
+                    font-size: 36px;
+                }
+                p {
+                    font-size: 17px;
+                }
             }
         }
     }
 }
 // 컨텐츠 4
 .content_4 {
-    width: 100%;
     .content_wrap {
-        @include flex(space-between);
-        @include size(100%, 600px);
+        @include size(100%, 880px);
+        display: table;
+        table-layout: fixed;
+        overflow: hidden;
     }
     .content {
-        @include flex(center);
-        @include size(33.5%, 100%);
-        background-color: #333;        
-        text-align: center;
-        align-items: center;
-        flex-direction: column;
-        &:nth-child(2) {
-            width: 33%;
-            background-color: #999;
+        position: relative;
+        display: table-cell;
+        vertical-align: top;
+        width: 33%;
+        height: 880px;
+        transition: 1s ease-in-out;
+        background: no-repeat;
+        background-size: cover;
+        font-size: 0;
+        &:hover {
+            width: 45%;
         }
-        .btn {
-            @include size(150px,50px);
-            background-color: black;
-            color: white;
-            line-height: 50px;
-        }
-        p {
-            margin: 30px 0;
+        .title {
+            position: absolute;
+            @include absolute(0%, 0%);
+            @include size(100%, 880px);
+            @include flex(center);
+            align-items: center;
+            flex-direction: column;
+            h3 {
+                font-size: 36px;
+            }
+            p {
+                margin: 20px 0;
+                font-size: 24px;
+            }
+            .btn {
+                font-size: 14px;
+                @include size(130px, 45px);
+                background-color: black;
+                color: white;
+                text-align: center;
+                line-height: 45px;
+            }
+            &::before {
+                @include content_4_ba;
+                margin-bottom: 30px;
+            }
+            &::after {
+                @include content_4_ba;
+                margin-top: 30px;
+            }
         }
     }
 }
+
 // 컨탠츠 5
 .content_5 {
     width: 100%;
@@ -254,7 +471,7 @@ a {
         @include flex(center);
         align-items: center;
         @include size(100%, 200px);
-        background-color: #ddd;
+        // background-color: #ddd;
         ul {
             width: 1500px;
             @include flex(space-evenly);
@@ -265,7 +482,7 @@ a {
 // 푸터
 .footer {
     position: relative;
-    @include size(100%, 322px);
+    @include size(100%, 352px);
     background-color: black;
     color: white;
     &::after {
