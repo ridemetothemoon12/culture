@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 // 믹스인 세팅
 @mixin flex($space) {
     display:flex;
@@ -18,12 +17,12 @@
     content: "";
     @include size(90px, 4px);
     background-color: #143b63;
+    transition: .5s;
 }
 @mixin btn_border {
     border: 1px solid;
     border-color: white;  
 }
-
 // 전체 세팅
 * {
     margin: 0;
@@ -47,14 +46,11 @@ a {
     align-items: center;
     z-index: 99;
     .logo {
-        @include flex(space-between);
+        @include flex(center);
         align-items: center;
-        flex-basis: 15%;
+        flex-basis: 30%;
         height: 100%;
         background-color: transparent;
-        img {
-            margin-left: 30px;
-        }
     }
     &.on {
         height: 100px;
@@ -92,14 +88,21 @@ a {
                 margin-right:30px;
             }
         }
+        .tablet_menu {
+            @include size(30px, 30px);
+            display: none;
+            cursor: pointer;
+            .line {
+                @include size(30px, 3px);
+                background-color: white;
+                border-radius: 50px;
+            }
+        }
     }
 }
-// 배너 세팅
+// 배너 세팅    
 .swiper-slide {
     @include size(100%, 960px);
-    background-size: cover;
-    background-size: 100% 100%;
-    background: no-repeat;
 }
 .banner1 {
     background-image: url("../images/banner1.png");
@@ -156,9 +159,8 @@ a {
             @include size(50px, 50px);
             .loading_wrap {
                 margin-top: 4px;
-                display: flex;
-                justify-content: center;
                 flex-wrap: wrap;
+                @include flex(center);
                 align-items: center;
             }
             .left_wrap {
@@ -197,7 +199,6 @@ a {
             }
         }
     }
-
     @keyframes loading-1 {
         0% {transform: rotate(0deg);}
         100% {transform: rotate(180deg);}
@@ -206,18 +207,17 @@ a {
         0% {transform: rotate(0deg);}
         100% {transform: rotate(180deg);}
     }
-
 // 컨텐츠 1번
 .content_1 {
     @include size(100%, 375px);
     display: flex;
     align-items: center;
         .content_wrap {
-        @include flex(space-between);
-        width: 1300px;
+        @include flex(center);
         flex-wrap: wrap;
-        margin: 0 auto;
         flex-direction: column;
+        width: 1300px;
+        margin: 0 auto;
     }
     .title {
         font-size: 37px;
@@ -234,6 +234,10 @@ a {
                 flex-direction: column;
                 text-align: center;
                 font-size: 22px;
+                transition: .3s;
+                &:hover {
+                    transform: translateY(-20px);
+                }
             }
             img {
                 @include size(80px, 80px)
@@ -241,7 +245,6 @@ a {
         }
     }
 }
-
 // 컨탠츠 2번 
 .content_2 {
     @include size(100%, 820px);
@@ -252,7 +255,6 @@ a {
         width: 1300px;
         flex-direction: column;
         margin: auto;
-        margin-bottom: 120px;
     }
     .title {
         font-size: 37px;
@@ -269,7 +271,8 @@ a {
             align-items: center;
         }
         .right {
-            @extend .left;
+            @include flex(center);
+            align-items: center;
             flex-direction: column;
         }
         ul {
@@ -304,38 +307,68 @@ a {
         @include flex(center);
         align-items: center;
         flex-direction: column;
-        .progress {
-            width: 510px;
-            display: flex;
-            justify-content: flex-end;
-            .progress_wrap {
-                width: 150px;
-                height: 30px;
+        .title_btns {
+            @include size(500px, 70px);
+            @include flex(space-between);
+            text-align: center;
+            .title {
+                @include size(170px, 100%);
+                transform: translate(-60px, 30px);
+                line-height: 70px;
+                font-size: 27px;
                 background-color: white;
-                #file {
-                    width: 150px;
+                filter: drop-shadow(0px 0px 3px black);
+                z-index: 2;
+            }
+            .btns {
+                margin-top: 30px;
+                @include flex(flex-around);
+                flex-direction: column;
+                color: white;
+                font-size: 15px;
+                font-weight: bold;
+                ul {
+                    @include size(120px, 30px);
+                    @include flex(space-between);
+                }
+                li {
+                    position: relative;
+                    &::after {
+                        content: "";
+                        @include size(5px, 5px);
+                        border-radius: 50%;
+                        background-color: white;
+                        position: absolute;
+                        @include absolute(-10px, 50%);
+                        transform: translateX(-50%);
+                    }
+                }
+                .bar {
+                    @include size(120px, 3px);
+                    background-color: white;
                 }
             }
         }
         .swiper-container {
-            @include size(510px, 470px);
-            background-size: cover;
-            background-size: 100% 100%;
-            background: no-repeat;
+            @include size(500px, 430px);
         }
         .swiper-slide {
-            @include size(510px, 470px);
-            background-size: contain;
+            @extend .swiper-container;
         }
         .news1 {
-            background: url("../images/news1.png");
-            background-size: contain;
+            background: url("../images/small_banner1.png") no-repeat;
+            background-size: cover;
+            background-position: center;
         }
         .news2 {
-            background: url("../images/news2.png");
+            background: url("../images/small_banner2.png") no-repeat;
+            background-size: cover;
+            background-position: center 10%;
         }
         .news3 {
-            background: url("../images/news3.png");
+            background: url("../images/small_banner3.jpg") no-repeat;
+            background-size: cover;
+            background-position: center 7%;
         }
     }
     .right {
@@ -364,10 +397,25 @@ a {
                 align-items: center;
             }
             li {
+                position: relative;
                 margin: 0 30px;
-            }
-            a {
                 color: white;
+                padding-bottom: 3px;
+                &::after {
+                    position: absolute;
+                    content: "";
+                    @include size(100%, 3px);
+                    @include absolute(23px, 0px);
+                    background: rgb(203,186,204);
+                    background: linear-gradient(116deg, rgba(203,186,204,1) 38%, rgba(37,128,179,1) 100%);
+                    transform: scaleX(0);
+                    transition: .3s;
+                }
+                &.on {
+                    &::after {
+                        transform: scaleX(1);
+                    }
+                }
             }
         }
         .content {
@@ -421,15 +469,33 @@ a {
         position: relative;
         display: table-cell;
         vertical-align: top;
-        width: 33%;
-        height: 880px;
+        @include size(33%, 880px);
         transition: 1s ease-in-out;
-        background: no-repeat;
-        background-size: cover;
         font-size: 0;
+        &:nth-child(1) {
+            background: url("../images/image11-h.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        &:nth-child(2) {
+            background: url("../images/image22-h.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        &:nth-child(3) {
+            background: url("../images/image33-h.jpg");
+            background-size: cover;
+            background-position: center;
+        }
         &:hover {
             width: 45%;
+            .title {
+                background-color: transparent;
+                &::before, &::after {
+                    width: 180px;
+                }
         }
+    }
         .title {
             position: absolute;
             @include absolute(0%, 0%);
@@ -437,6 +503,8 @@ a {
             @include flex(center);
             align-items: center;
             flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.5);
+            transition: .3s;
             h3 {
                 font-size: 36px;
             }
@@ -445,8 +513,8 @@ a {
                 font-size: 24px;
             }
             .btn {
-                font-size: 14px;
                 @include size(130px, 45px);
+                font-size: 14px;
                 background-color: black;
                 color: white;
                 text-align: center;
@@ -463,7 +531,6 @@ a {
         }
     }
 }
-
 // 컨탠츠 5
 .content_5 {
     width: 100%;
@@ -471,7 +538,6 @@ a {
         @include flex(center);
         align-items: center;
         @include size(100%, 200px);
-        // background-color: #ddd;
         ul {
             width: 1500px;
             @include flex(space-evenly);
@@ -482,17 +548,9 @@ a {
 // 푸터
 .footer {
     position: relative;
-    @include size(100%, 352px);
+    @include size(100%, 312px);
     background-color: black;
     color: white;
-    &::after {
-        position: absolute;
-        content: "";
-        width: 100%;
-        @include size(100%, 2px);
-        bottom: 45px;
-        background-color: white;
-    }
     a {
         color: white;
     }
@@ -512,11 +570,425 @@ a {
         }
     }
     .bottom {
-        @include size(100%, 210px);
+        @include size(100%, 0px);
         @include flex(space-between);
         margin-top: 30px;
         li {
             margin: 10px 0;
+        }
+    }
+}
+// 테블릿
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+    // 헤더 세팅
+    .header_wrap {
+        .menu {
+            display: none;
+        }
+        .icon {
+            li {
+                &:nth-child(2), &:nth-child(3)  {
+                    display: none;
+                }
+            }
+            .tablet_menu {
+                @include flex(space-around);
+                flex-direction: column;
+            }
+        }
+    }
+    // 배너 스와이퍼 세팅
+    .swiper-slide {
+        @include size(100%, 568px);
+        background-size: cover;
+    }
+    // 배너 스와이퍼 불렛 세팅
+    .bullet {
+        @include size(200px, 80px);
+    }
+    // 컨탠츠 1번
+    .content_1 {
+        @include size(90%, 238px);
+        margin: 0 auto;
+        .title {
+            font-size: 23px;
+        }
+        .menu {
+            ul {
+                li {
+                    font-size: 15px;
+                }
+                img {
+                    @include size(56px, 56px);
+                }
+            }
+        }
+    }
+    // 컨탠츠 2번
+    .content_2 {
+        @include size(100%, 523px);
+        .content_wrap {
+            width: 90%;
+        }
+        .title {
+            width: 90%;
+            font-size: 23px;
+            margin-bottom: 30px;
+        }
+        .left {
+            img {
+                @include size(218px, 240px);
+            }
+        }
+        .right {
+            img {
+                @include size(350px, 25px);
+            }
+        }
+        .content {
+            height: 330px;
+            ul {
+                @include size(500px, 150px);
+                font-size: 17px;
+            }
+            li {
+                line-height: 50px;
+                &:nth-child(4) {
+                    margin-left: 9px;
+                }
+                &:nth-child(5) {
+                    margin-right: 9px;
+                }
+            }
+        }
+    }
+    // 컨탠츠 3번
+    .content_3 {
+        @include size(100%, 400px);
+        .left {
+            @include size(400px, 400px);
+            .title_btns {
+                @include size(290px, 70px);
+                .title {
+                    @include size(97px, 39px);
+                    transform: translate(0px, 25px);
+                    line-height: 39px;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+            }
+            .swiper-container {
+                @include size(290px, 245px);
+            }
+        }
+        .right {
+            @include size(640px,100%);
+            .title {
+                @include size(100%, 110px);
+                .text {
+                    margin-left: 50px;
+                }
+                h3 {
+                    font-size: 23px;
+                }
+                p {
+                    margin-top: 15px;
+                    font-size: 15px;
+                }
+            }
+            .nav {
+                @include size(100%, 40px);
+                li {
+                    margin: 0 20px;
+                    &::after {
+                        @include size(100%, 2px);
+                    }
+                }
+            }
+            .content {
+                @include size(100%, 250px);
+                font-size: 16px;
+                ul {
+                    margin-left: 50px;
+                }
+                li {
+                    padding: 15px 0;
+                    &::after {
+                        @include size(100%, 2.5px);
+                    }
+                }
+                .date {
+                    h3 {
+                        font-size: 20px;
+                    }
+                    p {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+    }
+    .content_4 {
+        .content_wrap {
+            @include size(100%, 475px);
+        }
+        .content {
+            @include size(33%, 475px);
+            .title {
+                @include size(100%, 475px);
+                h3 {
+                    font-size: 20px;
+                }
+                p {
+                    font-size: 13px;
+                }
+                .btn {
+                    @include size(69px, 24px);
+                    font-size: 10px;
+                    line-height: 24px;
+                }
+                &::before {
+                    @include content_4_ba;
+                    height: 3px;
+                    margin-bottom: 20px;
+                }
+                &::after {
+                    @include content_4_ba;
+                    height: 3px;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+    .content_5 {
+        .content_wrap {
+            @include size(100%, 135px);
+            ul {
+                width: 100%;
+                img {
+                    @include size(140px, 37px);
+                }
+            }
+        }
+    }
+    .footer {
+        @include size(100%, 155px);
+        .top {
+            display: none;  
+        }
+        .bottom {
+            margin-top: 10px;
+            li {
+                font-size: 14px;
+            }
+        }
+        .sns {
+            img {
+                @include size(30px, 30px);
+                margin: 10px 10px;
+            }
+        }
+    }
+}
+// 모바일
+@media screen and (max-width: 640px) {
+    // 헤더
+    .header_wrap {
+        @include flex(space-around);
+        .menu {
+            display: none;
+        }
+        .icon {
+            li {
+                &:not(:nth-last-child(1)) {
+                    display: none;
+                }
+            }
+            .tablet_menu {
+                @include flex(space-around);
+                flex-direction: column;
+            }
+        }
+    }
+    .swiper-slide {
+        @include size(100%, 680px);
+        background-size: cover;
+        background-position: center;
+    }
+    // 컨탠츠 1번
+    .content_1 {
+        @include size(100%, 450px);
+        .title {
+            display: none;
+        }
+        .menu {
+            li {
+                margin: 20px 20px;
+            }
+        }
+    }
+    // 컨탠츠 2번
+    .content_2 {
+        @include size(100%, 590px);
+        background-position: center;
+        .content_wrap {
+            width: 100%;
+        }
+        .title {
+            display: none;
+        }
+        .left {
+            img {
+                @include size(180px, 180px);
+            }
+        }
+        .right {
+            @include flex(center);
+            align-items: center;
+            img {
+                @include size(350px, 25px);
+            }
+        }
+        .content {
+            height: 350px;
+            ul {
+                @include size(300px, 150px);
+                font-size: 17px;
+            }
+            li {
+                line-height: 40px;
+                &:nth-child(4) {
+                    margin-left: 9px;
+                }
+                &:nth-child(5) {
+                    margin-right: 9px;
+                }
+            }
+        }
+    }
+    // 컨탠츠 3번 
+    .content_3 {
+        @include size(100%, 970px);
+        .content_wrap {            
+            flex-direction: column;
+            @include flex(flex-start);
+        }
+        .left {
+            @include size(100%, 430px);
+            @include flex(center);
+            align-items: center;
+            .title_btns {
+                display: none;
+            }
+            .swiper-container {
+                @include size(95%, 85%);
+            }
+        }
+        .right {
+            @include size(100%, 440px);
+            .title {
+                display: none;
+            }
+            .nav {
+                margin-top: 30px;
+                font-size: 18px;
+                @include flex(center);
+                ul {
+                    width: 80%;
+                }
+                li {
+                    margin: 0 10px;
+                    &::after {
+                        margin-top: 5px;
+                        @include size(100%, 3px);
+                    }
+                }
+            }
+            .content {
+                ul {
+                    width: 100%;
+                    margin-left: 10px;
+                }
+                li {
+                    @include flex(space-between);
+                    a {
+                        width: 80%;
+                    }
+                    &::after {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .content_4 {
+        .content_wrap {
+            @include size(100%, 740px);
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            @include size(100%, 33%);
+            &:hover {
+                width: 100%;
+                .title {
+                    background-color: transparent;
+                    &::before, &::after {
+                        width: 180px;
+                    }
+            }
+        }
+            .title {
+                @include size(100%, 100%);
+                &::before {
+                    @include content_4_ba;
+                    margin-bottom: 10px;
+                }
+                &::after {
+                    @include content_4_ba;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+    .content_5 {
+        .content_wrap {
+            @include size(100%, 135px);
+            ul {
+                width: 100%;
+                img {
+                    @include size(140px, 37px);
+                }
+            }
+        }
+    }
+    .footer {
+        .top {
+            font-size: 12px;
+            position: absolute;
+            top: 60px;
+            border: none;
+        }
+        .bottom {
+            @include flex(space-between);
+            flex-direction: column;
+            align-items: center;
+            .text {
+                position: absolute;
+                left: 10px;
+                top: 45%;
+            }
+            .sns {
+                height: 50%;
+                position: absolute;
+                left: 90%;
+                top: 45%;
+                @include flex(space-around);
+                flex-direction: column;
+                img {
+                    @include size(30px, 30px);
+                }
+            }
         }
     }
 }

@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+    // 헤더 세팅
+    .header_wrap {
+        .menu {
+            display: none;
+        }
+        .icon {
+            li {
+                &:nth-child(2), &:nth-child(3)  {
+                    display: none;
+                }
+            }
+            .tablet_menu {
+                @include flex(space-around);
+                flex-direction: column;
+            }
+        }
+    }
+    // 배너 스와이퍼 세팅
+    .swiper-slide {
+        @include size(100%, 568px);
+        background-size: cover;
+    }
+    // 배너 스와이퍼 불렛 세팅
+    .bullet {
+        @include size(200px, 80px);
+    }
+    // 컨탠츠 1번
+    .content_1 {
+        @include size(90%, 238px);
+        margin: 0 auto;
+        .title {
+            font-size: 23px;
+        }
+        .menu {
+            ul {
+                li {
+                    font-size: 150px;
+                }
+                img {
+                    @include size(56px, 56px);
+                }
+            }
+        }
+    }
+}

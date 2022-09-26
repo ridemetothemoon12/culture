@@ -20,10 +20,16 @@ $('document').ready(function() {
         }
     })
 
-    $(window).scroll(function() {
-        let top = $(this).scrollTop();
+    swiper.on("transitionEnd", function(e){
+        var slideIndex = swiper.realIndex;
+        $('.item').removeClass("active");
+        $('.item').eq(slideIndex).addClass("active");
+    });
 
-        if(top > 900) {
+    $(window).scroll(function() {
+        let header_height = $('.swiper').height() - 100;
+        let top = $(this).scrollTop();
+        if(top > header_height) {
             $('.header_wrap').addClass("on");
             $('.header_wrap .menu ul').css("line-height", "100px");
         }
@@ -34,16 +40,13 @@ $('document').ready(function() {
     })
     $('.item').click(function() {
         let i = $(this).index();
-        console.log(i);
         $('.item').removeClass("active");
         $(this).addClass("active");
         swiper.slideTo(i+1)
     })
 
-    swiper.on("transitionEnd", function(e){
-        var slideIndex = swiper.realIndex;
-        $('.item').removeClass("active");
-        $('.item').eq(slideIndex).addClass("active");
-        console.log(slideIndex);
-    });
+    $('.nav li').click(function() {
+        $('.nav li').removeClass("on");
+        $(this).addClass("on");
+    })
 })

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
-    <link rel="stylesheet"  type="text/css" href="scss/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="scss/style_tablet.css"> -->
+    <link rel="stylesheet" type="text/css" href="scss/style.css">
 
     <script src="js/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
@@ -33,6 +34,13 @@
                     <li><a href="#"><img src="images/search.png" alt=""></a></li>
                     <li><a href="#"><img src="images/login.png" alt=""></a></li>
                     <li><a href="#"><img src="images/language.png" alt=""></a></li>
+                    <li>
+                        <div class="tablet_menu">
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -145,11 +153,19 @@
     <div class="content_3">
         <div class="content_wrap">
             <div class="left">
-                <!-- <div class="progress">
-                    <div class="progress_wrap">
-                        <progress id="file" max="100" value="70"></progress>
+                <div class="title_btns">
+                    <div class="title">
+                        <p>NEWS</p>
                     </div>
-                </div> -->
+                    <div class="btns">
+                        <ul>
+                            <li>01</li>
+                            <li>02</li>
+                            <li>03</li>
+                        </ul>
+                        <div class="bar"></div>
+                    </div>
+                </div>
                 <div class="swiper_news swiper-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide news1"></div>
@@ -167,10 +183,10 @@
                 </div>
                 <div class="nav">
                     <ul>
-                        <li><a href="">공지사항</a></li>
-                        <li><a href="">보도자료</a></li>
-                        <li><a href="">채용정보</a></li>
-                        <li><a href="">입찰정보</a></li>
+                        <li class="on">공지사항</li>
+                        <li>보도자료</li>
+                        <li>채용정보</li>
+                        <li>입찰정보</li>
                     </ul>
                 </div>
                 <div class="content">
@@ -205,7 +221,6 @@
     <div class="content_4">
         <div class="content_wrap">
             <div class="content">
-                <img src="../images/image11-h.png" alt="">
                 <div class="title">
                     <h3>관광</h3>
                     <p>특색있는 지역 문화 관광</p>
@@ -214,7 +229,6 @@
                 <div class="fliter"></div>
             </div>
             <div class="content">
-                <img src="../images/image22-h.png" alt="">
                 <div class="title">
                     <h3>연극</h3>
                     <p>일상에서 다시 누리는 문화생활</p>
@@ -222,7 +236,6 @@
                 </div>
             </div>
             <div class="content">
-                <img src="../images/image33-h.png" alt="">
                 <div class="title">
                     <h3>뮤지컬</h3> 
                     <p>문화예술을 통한 국민위로</p>
