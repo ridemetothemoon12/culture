@@ -1,5 +1,9 @@
 @charset "utf-8";
 // 믹스인 세팅
+@font-face {
+    font-family: nanumR;
+    src: url("../fonts/NanumSquareR.ttf");
+}
 @mixin flex($space) {
     display:flex;
     flex-wrap: nowrap;
@@ -25,6 +29,7 @@
 }
 // 전체 세팅
 * {
+    font-family: nanumR;
     margin: 0;
     padding: 0;
 }
@@ -38,6 +43,20 @@ a {
 // 헤더
 .header {
     position: relative;
+    .arrow {
+        font-size: 30px;
+        position: absolute;
+        top: 66%;
+        left: 120px;
+        z-index: 9;
+        color: white;
+        .text {
+            margin-bottom: 5px;
+        }
+        span {
+            font-weight: bold;
+        }
+    }
 }
 .header_wrap {
     position: fixed;
@@ -45,35 +64,40 @@ a {
     @include flex(space-between);
     align-items: center;
     z-index: 99;
-    .logo {
-        @include flex(center);
-        align-items: center;
-        flex-basis: 30%;
-        height: 100%;
-        background-color: transparent;
-    }
     &.on {
         height: 100px;
         background-color: rgb(48, 48, 48);
     }
-    .menu {
-        font-size: 18px;
-        flex-basis: 65%;
+    .logo_menu_wrap {
+        flex-basis: 1000px;
         height: 100%;
-        ul {
-            @include flex(flex-start);
-            line-height: 150px;
-            li {
-                margin: 0 3%;
-                &:hover {
-                    a {
-                        font-weight: bold;
-                        color: #143b63;
+        @include flex(space-around);
+        .logo {
+        @include flex(center);
+        align-items: center;
+        height: 100%;
+        flex-basis: 200px;
+        background-color: transparent;
+        }
+        .menu {
+            flex-basis: 600px;
+            font-size: 18px;
+            height: 100%;
+            ul {
+                @include flex(flex-start);
+                line-height: 150px;
+                li {
+                    margin: 0 3%;
+                    &:hover {
+                        a {
+                            font-weight: bold;
+                            color: #143b63;
+                        }
                     }
                 }
-            }
-            a {
-                color: white;
+                a {
+                    color: white;
+                }
             }
         }
     }
@@ -120,7 +144,7 @@ a {
     .bullet {
         position: absolute;
         @include absolute(80%, 100px);
-        @include size(400px, 80px);
+        @include size(250px, 80px);
         z-index: 3;
         .bullet_wrap {
             width: 100%;
@@ -581,6 +605,11 @@ a {
 // 테블릿
 @media screen and (min-width: 641px) and (max-width: 1024px) {
     // 헤더 세팅
+    .header {
+        .arrow {
+            top: 60%;
+        }
+    }
     .header_wrap {
         .menu {
             display: none;
@@ -793,6 +822,11 @@ a {
 // 모바일
 @media screen and (max-width: 640px) {
     // 헤더
+    .header {
+        .arrow {
+            top: 60%;
+        }
+    }
     .header_wrap {
         @include flex(space-around);
         .menu {

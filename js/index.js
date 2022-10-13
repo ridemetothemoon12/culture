@@ -15,9 +15,6 @@ $('document').ready(function() {
             delay: 1000,
         },
         loop:true,
-        renderBullet: function (index, className) {
-            return '<div class="' + className + '"><span>' + (bullet[index]) + '</span></div>';
-        }
     })
 
     swiper.on("transitionEnd", function(e){
